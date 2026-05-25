@@ -9,14 +9,6 @@
 
 import SwiftUI
 
-struct Person {
-  let name: String
-  var age: Int
-  func greet() -> String {
-    return "Привет, меня зовут \(name)!"
-  }
-}
-
 
 struct ContentView: View {
 
