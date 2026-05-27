@@ -14,37 +14,31 @@ struct ContentView: View {
 
     var body: some View {
         VStack {
-
-//            Image(systemName: "globe")
-//                .imageScale(.large)
-//                .foregroundStyle(.tint)
             
+            //            Image(systemName: "globe")
+            //                .imageScale(.large)
+            //                .foregroundStyle(.tint)
             
-            Image(systemName:"heart.fill")
-                .imageScale(.large)
-                .foregroundStyle(.red)
-                .padding(25)
-            
-            Text("Title")
-            Text("Description description")
-            
-            Button(action: {
-                        print("Нажал кнопку удаления")
-                    }) {
-                        Label(
-                            title: {
-                                Text("Удалить")
-                                    .fontWeight(.semibold)
-                                    .font(.title)
-                            }, icon: {
-                                Image(systemName: "trash")
-                                    .font(.title)
-                            } )
-                        .padding()
-                        .foregroundColor(.white)
-                        .background(.red)
-                        .cornerRadius(40)
+            // Вынеси кнопку в отдельный View или используй HStack/VStack
+            HStack(spacing: 16) {
+                ForEach(["1", "2", "3",], id: \.self) { num in
+                    Button {
+                        print("Нажал \(num)")
+                    } label: {
+                        Text(num)
+                            .fontWeight(.semibold)
+                            .font(.title)
+                            .foregroundColor(.white)
+                            .frame(width: 60, height: 60)
+                            .background(Color.red)
+                            .cornerRadius(10)
                     }
+                }
+            }
+            
+            
+            
+            
             
         }
         
