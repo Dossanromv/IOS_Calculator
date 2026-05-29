@@ -135,6 +135,41 @@ struct ContentView: View {
                     }
                 }
             }
+            
+            
+            HStack(spacing: 20) {
+                ForEach(["*", "/",], id: \.self) { num in
+                    Button {
+                        if num == "*" || num == "/" {
+                            
+                            firstNumber = display
+                            operation = num
+                            display = "0"
+
+                            
+                        } else {
+                            
+                            if display == "0" {
+                                display = num
+                            } else {
+                                display += num
+                            }
+
+                        }
+                        
+                        
+                    } label: {
+                        Text(num)
+                            .fontWeight(.semibold)
+                            .font(.title)
+                            .foregroundColor(.white)
+                            .frame(width: 100, height: 60)
+                            .background(Color.red)
+                            .cornerRadius(10)
+                    }
+                }
+            }
+
 
 
 
@@ -161,9 +196,9 @@ struct ContentView: View {
                 
                 Button {
                     
-                    let first = Double(firstNumber) ?? 0
-                    let second = Double(display) ?? 0
-                    let result: Double
+                    var first = Double(firstNumber) ?? 0
+                    var second = Double(display) ?? 0
+                    var result: Double
 
                     if operation == "+" {
                         result = first + second
@@ -172,7 +207,20 @@ struct ContentView: View {
                     } else {
                         result = 0
                     }
+                    
+                    
+                    
+                    if operation == "*" {
+                        result = first * second
+                    } else if operation == "/" {
+                        result = first / second
+                    } else {
+                        result = 0
+                    }
 
+                    
+                    
+                    
                     if result.truncatingRemainder(dividingBy: 1) == 0 {
                         display = String(Int(result))
                     } else {
