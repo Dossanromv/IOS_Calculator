@@ -13,6 +13,8 @@ import SwiftUI
 struct ContentView: View {
 
     @State var display = "0"
+    @State private var firstNumber = ""
+    @State private var operation = ""
 
     
     var body: some View {
@@ -104,7 +106,24 @@ struct ContentView: View {
             HStack(spacing: 20) {
                 ForEach(["+", "0", "-"], id: \.self) { num in
                     Button {
-                        print("Нажал \(num)")
+                        if num == "+" || num == "-" {
+                            
+                            firstNumber = display
+                            operation = num
+                            display = "0"
+
+                            
+                        } else {
+                            
+                            if display == "0" {
+                                display = num
+                            } else {
+                                display += num
+                            }
+
+                        }
+                        
+                        
                     } label: {
                         Text(num)
                             .fontWeight(.semibold)
@@ -134,11 +153,33 @@ struct ContentView: View {
                      Text("Удалить")
                          .fontWeight(.semibold)
                          .foregroundColor(.white)
-                         .frame(width: 100, height: 30)
+                         .frame(width: 70, height: 30)
                          .padding()
                          .background(Color.red)
                          .cornerRadius(12)
                  }
+                
+                Button {
+                    
+                    let first = Double(firstNumber) ?? 0
+                        let second = Double(display) ?? 0
+                        
+                        if operation == "+" {
+                            display = String(first + second)
+                        } else if operation == "-" {
+                            display = String(first - second)
+                        }
+
+                } label: {
+                    Text("=")
+                        .fontWeight(.semibold)
+                        .foregroundColor(.white)
+                        .frame(width: 10, height: 30)
+                        .padding()
+                        .background(Color.red)
+                        .cornerRadius(12)
+                }
+
                 
                  Button {
                      
@@ -148,11 +189,12 @@ struct ContentView: View {
                      Text("Отмена")
                          .fontWeight(.semibold)
                          .foregroundColor(.white)
-                         .frame(width: 100, height: 30)
+                         .frame(width: 70, height: 30)
                          .padding()
                          .background(Color.gray)
                          .cornerRadius(12)
                  }
+                
              }
              .padding(.horizontal)
          }
