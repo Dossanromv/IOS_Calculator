@@ -15,6 +15,9 @@ struct ContentView: View {
     var body: some View {
         VStack {
             
+            @State var display = "0"
+            
+            
             
              HStack(spacing: 20) {
                  ForEach(["1", "2", "3"], id: \.self) { num in
@@ -50,8 +53,26 @@ struct ContentView: View {
              }
             
             
+            
             HStack(spacing: 20) {
                 ForEach(["7", "8", "9"], id: \.self) { num in
+                    Button {
+                        print("Нажал \(num)")
+                    } label: {
+                        Text(num)
+                            .fontWeight(.semibold)
+                            .font(.title)
+                            .foregroundColor(.white)
+                            .frame(width: 60, height: 60)
+                            .background(Color.red)
+                            .cornerRadius(10)
+                    }
+                }
+            }
+            
+            
+            HStack(spacing: 20) {
+                ForEach(["+", "0", "-"], id: \.self) { num in
                     Button {
                         print("Нажал \(num)")
                     } label: {
@@ -69,7 +90,7 @@ struct ContentView: View {
 
 
 
-            HStack(spacing: 30)
+            HStack(spacing: 10)
             {
                  Button {
                      print("Удалить")
@@ -77,7 +98,7 @@ struct ContentView: View {
                      Text("Удалить")
                          .fontWeight(.semibold)
                          .foregroundColor(.white)
-                         .frame(maxWidth: .infinity)
+                         .frame(width: 100, height: 30)
                          .padding()
                          .background(Color.red)
                          .cornerRadius(12)
@@ -87,7 +108,7 @@ struct ContentView: View {
                      Text("Отмена")
                          .fontWeight(.semibold)
                          .foregroundColor(.white)
-                         .frame(maxWidth: .infinity)
+                         .frame(width: 100, height: 30)
                          .padding()
                          .background(Color.gray)
                          .cornerRadius(12)
