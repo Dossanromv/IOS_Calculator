@@ -163,14 +163,21 @@ struct ContentView: View {
                     
                     let first = Double(firstNumber) ?? 0
                     let second = Double(display) ?? 0
-                    let result = first + second  // или - для минуса
+                    let result: Double
+
+                    if operation == "+" {
+                        result = first + second
+                    } else if operation == "-" {
+                        result = first - second
+                    } else {
+                        result = 0
+                    }
 
                     if result.truncatingRemainder(dividingBy: 1) == 0 {
                         display = String(Int(result))
                     } else {
                         display = String(result)
                     }
-                    
                 } label: {
                     Text("=")
                         .fontWeight(.semibold)
