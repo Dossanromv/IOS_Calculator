@@ -12,17 +12,36 @@ import SwiftUI
 
 struct ContentView: View {
 
+    @State var display = "0"
+
+    
     var body: some View {
+        
+        
+
+        
         VStack {
             
-            @State var display = "0"
             
+
+            Text(display)
+                .font(.system(size: 64, weight: .light))
+                .foregroundColor(.black)
+                .frame(maxWidth: .infinity, alignment: .trailing)
+                .padding(.horizontal)
             
+                        
             
              HStack(spacing: 20) {
                  ForEach(["1", "2", "3"], id: \.self) { num in
                      Button {
-                         print("Нажал \(num)")
+                         
+                         if display == "0" {
+                             display = num
+                         } else {
+                             display += num
+                         }
+                         
                      } label: {
                          Text(num)
                              .fontWeight(.semibold)
@@ -39,7 +58,13 @@ struct ContentView: View {
              HStack(spacing: 20) {
                  ForEach(["4", "5", "6"], id: \.self) { num in
                      Button {
-                         print("Нажал \(num)")
+                         if display == "0" {
+                             display = num
+                         } else {
+                             display += num
+                         }
+
+                         
                      } label: {
                          Text(num)
                              .fontWeight(.semibold)
@@ -57,7 +82,12 @@ struct ContentView: View {
             HStack(spacing: 20) {
                 ForEach(["7", "8", "9"], id: \.self) { num in
                     Button {
-                        print("Нажал \(num)")
+                        if display == "0" {
+                            display = num
+                        } else {
+                            display += num
+                        }
+
                     } label: {
                         Text(num)
                             .fontWeight(.semibold)
@@ -93,7 +123,13 @@ struct ContentView: View {
             HStack(spacing: 10)
             {
                  Button {
-                     print("Удалить")
+                     
+                     if display.count > 1 {
+                         display.removeLast()
+                     } else {
+                         display = "0"
+                     }
+                     
                  } label: {
                      Text("Удалить")
                          .fontWeight(.semibold)
@@ -104,7 +140,11 @@ struct ContentView: View {
                          .cornerRadius(12)
                  }
                 
-                 Button {} label: {
+                 Button {
+                     
+                     display = "0"
+                     
+                 } label: {
                      Text("Отмена")
                          .fontWeight(.semibold)
                          .foregroundColor(.white)
